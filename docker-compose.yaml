@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  dev-postgres:
+    image: postgres:14.4-alpine
+    container_name: fesrental-postgres
+    ports:
+      - 5433:5432
+    environment:
+      POSTGRES_USER: fesrental
+      POSTGRES_PASSWORD: fesrental
+      POSTGRES_DB: fesrental
+    restart: always
+    networks:
+      - lesson
+networks:
+  lesson:
