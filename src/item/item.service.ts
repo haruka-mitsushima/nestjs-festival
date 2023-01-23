@@ -4,7 +4,7 @@ import { Item } from '../type/item';
 
 @Injectable()
 export class ItemService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   async getNewItems(): Promise<Item[]> {
     const items = await this.prisma.item.findMany({
