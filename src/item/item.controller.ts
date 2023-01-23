@@ -4,7 +4,7 @@ import { ItemService } from './item.service';
 
 @Controller('api/item')
 export class ItemController {
-  constructor(private readonly itemService: ItemService) { }
+  constructor(private readonly itemService: ItemService) {}
 
   @Get('new')
   async getNewItems(): Promise<Item[]> {
