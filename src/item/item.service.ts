@@ -37,4 +37,33 @@ export class ItemService {
     }));
     return genreItems;
   }
+
+  async preTop(id: number): Promise<{ newItems: Item[]; genreItems: Item[] }> {
+    const items = await this.prisma.item.findMany({
+      orderBy: {
+        itemId: 'desc',
+      },
+      take: 10,
+    });
+    const newItems = items.map((item) => ({
+      ...item,
+      releaseDate: item.releaseDate.toString(),
+    }));
+    const result = await this.prisma.item.findMany({
+      where: {
+        categories: {
+          has: id,
+        },
+      },
+      orderBy: {
+        itemId: 'desc',
+      },
+    });
+    const genreItems = result.map((item) => ({
+      ...item,
+      releaseDate: item.releaseDate.toString(),
+    }));
+
+    return { newItems, genreItems };
+  }
 }
