@@ -1,5 +1,12 @@
-import { Body, Controller, Post } from '@nestjs/common';
-import { User } from '@prisma/client';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+} from '@nestjs/common';
+import { Cart, User } from '@prisma/client';
 import { CreateUserDto } from './dto/createUser-dto';
 import { LoginDto } from './dto/login-dto';
 import { UserService } from './user.service';
@@ -30,5 +37,12 @@ export class UserController {
   @Post()
   async getUserById(@Body('userId') id: string): Promise<User> {
     return await this.userService.getUserById(Number(id));
+  }
+
+  @Get('selectCart/:id')
+  async selectCart(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<{ cart?: Cart[]; errorFlg: boolean }> {
+    return await this.userService.selectCart(Number(id));
   }
 }
