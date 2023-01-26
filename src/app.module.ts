@@ -6,10 +6,18 @@ import { PrismaModule } from './prisma/prisma.module';
 import { ItemModule } from './item/item.module';
 import { UserModule } from './user/user.module';
 import { CartModule } from './cart/cart.module';
+import { PaymentModule } from './payment/payment.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true }), PrismaModule, ItemModule, UserModule, CartModule],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    PrismaModule,
+    ItemModule,
+    UserModule,
+    CartModule,
+    PaymentModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}
