@@ -7,6 +7,7 @@ import { ItemModule } from './item/item.module';
 import { UserModule } from './user/user.module';
 import { CartModule } from './cart/cart.module';
 import { PaymentModule } from './payment/payment.module';
+import { RentalHistoryModule } from './rentalHistory/rentalHistory.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { PaymentModule } from './payment/payment.module';
     UserModule,
     CartModule,
     PaymentModule,
+    RentalHistoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
