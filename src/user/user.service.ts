@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { User } from '@prisma/client';
+import { Cart, User } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from './dto/createUser-dto';
 import { LoginDto } from './dto/login-dto';
@@ -52,5 +52,27 @@ export class UserService {
     });
     delete user.password;
     return user;
+  }
+
+  async selectCart(id: number): Promise<{ cart?: Cart[]; errorFlg: boolean }> {
+    const data = await this.prisma.user.findUnique({
+      where: {
+        userId: id,
+      },
+      select: {
+        carts: {
+          include: {
+            items: true,
+          },
+        },
+      },
+    });
+    let errorFlg = false;
+    if (!data) {
+      errorFlg = true;
+      return { errorFlg };
+    } else {
+      return { cart: data.carts, errorFlg };
+    }
   }
 }
