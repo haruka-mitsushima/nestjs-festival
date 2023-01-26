@@ -6,9 +6,17 @@ import { AddLogedinCartDto } from './dto/addLoginedCart-dto';
 export class CartService {
   constructor(private prisma: PrismaService) {}
 
-  async addLogedinCart(dto: AddLogedinCartDto[]): Promise<void> {
+  async addLogedinCart(sessionCart: AddLogedinCartDto[]): Promise<void> {
     await this.prisma.cart.createMany({
-      data: dto,
+      data: sessionCart,
+    });
+  }
+
+  async deleteCart(cartId: number): Promise<void> {
+    await this.prisma.cart.delete({
+      where: {
+        cartId: cartId,
+      },
     });
   }
 }
