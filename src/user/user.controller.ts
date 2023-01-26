@@ -1,11 +1,19 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { CreateUserDto } from './dto/createUser-dto';
+import { LoginDto } from './dto/login-dto';
 import { UserService } from './user.service';
 
 @Controller('api/user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
+
+  @Post('login')
+  async login(
+    @Body() dto: LoginDto,
+  ): Promise<{ userId: number; userName: string }> {
+    return await this.userService.login(dto);
+  }
 
   @Post('signup')
   async createUser(@Body() dto: CreateUserDto): Promise<{ message: string }> {
