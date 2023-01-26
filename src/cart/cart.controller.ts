@@ -13,6 +13,15 @@ import { AddLogedinCartDto } from './dto/addLoginedCart-dto';
 export class CartController {
   constructor(private readonly cartService: CartService) {}
 
+  @Get('addCart/:userId/:itemId/:period')
+  async addCart(
+    @Param('userId', ParseIntPipe) userId: number,
+    @Param('itemId', ParseIntPipe) itemId: number,
+    @Param('period', ParseIntPipe) period: number,
+  ): Promise<{ isAdd: boolean }> {
+    return await this.cartService.addCart(userId, itemId, period);
+  }
+
   @Post('addLogedinCart')
   async addLogedinCart(
     @Body('sessionCart') sessionCart: AddLogedinCartDto[],

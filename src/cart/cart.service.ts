@@ -6,6 +6,17 @@ import { AddLogedinCartDto } from './dto/addLoginedCart-dto';
 export class CartService {
   constructor(private prisma: PrismaService) {}
 
+  async addCart(userId: number, itemId: number, period: number): Promise<{ isAdd: boolean }> {
+    const data = await this.prisma.cart.create({
+      data: {
+        userId: userId,
+        itemId: itemId,
+        rentalPeriod: period,
+      },
+    });
+    if (data) return { isAdd: true };
+  }
+
   async addLogedinCart(sessionCart: AddLogedinCartDto[]): Promise<void> {
     await this.prisma.cart.createMany({
       data: sessionCart,
