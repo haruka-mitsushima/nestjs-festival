@@ -16,4 +16,18 @@ export class RentalHistoryService {
     });
     return { rental: data };
   }
+
+  async updateRentalHistory(
+    id: number,
+    data: { rentalStart: Date; rentalEnd: Date },
+  ): Promise<void> {
+    await this.prisma.rentalHistory.update({
+      where: {
+        rentalHistoryId: id,
+      },
+      data: {
+        ...data,
+      },
+    });
+  }
 }
