@@ -72,13 +72,13 @@ model Review {
 // レンタル履歴
 model RentalHistory {
   rentalHistoryId Int       @id @default(autoincrement())
-  userId          Int
+  userId          Int 
   itemId          Int
   itemName        String
   price           Int
   itemImage       String
   rentalPeriod    Int
-  payDate         DateTime
+  payDate         DateTime? @default(now())
   rentalStart     DateTime?
   rentalEnd       DateTime?
   users           User      @relation(fields: [userId], references: [userId])
