@@ -8,6 +8,7 @@ import { UserModule } from './user/user.module';
 import { CartModule } from './cart/cart.module';
 import { PaymentModule } from './payment/payment.module';
 import { RentalHistoryModule } from './rentalHistory/rentalHistory.module';
+import { ReviewModule } from './review/review.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { RentalHistoryModule } from './rentalHistory/rentalHistory.module';
     CartModule,
     PaymentModule,
     RentalHistoryModule,
+    ReviewModule,
   ],
   controllers: [AppController],
   providers: [AppService],
