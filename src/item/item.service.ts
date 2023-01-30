@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { identity } from 'rxjs';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Item } from '../type/item';
 
@@ -63,7 +64,18 @@ export class ItemService {
       ...item,
       releaseDate: item.releaseDate.toString(),
     }));
-
     return { newItems, genreItems };
+  }
+
+  async getAllItems(): Promise<Item[]> {
+    return await this.prisma.item.findMany();
+  }
+
+  async getItemById(id: number): Promise<Item> {
+    return await this.prisma.item.findUnique({
+      where: {
+        itemId: id,
+      },
+    });
   }
 }
