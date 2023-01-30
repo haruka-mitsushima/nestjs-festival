@@ -55,7 +55,13 @@ export class ReviewService {
     });
   }
 
-  async getSortedReview(id, orderBy, order, page, pageSize): Promise<Review[]> {
+  async getSortedReview(
+    id: number,
+    orderBy: string,
+    order: string,
+    page: number,
+    pageSize: number,
+  ): Promise<Review[]> {
     const skip = (page - 1) * pageSize;
     return await this.prisma.review.findMany({
       where: {
@@ -65,10 +71,27 @@ export class ReviewService {
         [orderBy]: order,
       },
       skip: skip,
+      select: {
+        reviewId: true,
+        itemId: true,
+        userId: true,
+        postTime: true,
+        reviewTitle: true,
+        reviewText: true,
+        evaluation: true,
+        spoiler: true,
+        users: {
+          select: {
+            userName: true,
+          },
+        },
+      },
     });
   }
 
-  async getAverageScore(id): Promise<{ average: number; totalCount: number }> {
+  async getAverageScore(
+    id: number,
+  ): Promise<{ average: number; totalCount: number }> {
     const reviews = await this.prisma.review.findMany({
       where: {
         itemId: id,
