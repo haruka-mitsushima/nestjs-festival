@@ -29,6 +29,7 @@ model User {
   category        Category?       @relation(fields: [favoriteId], references: [categoryId])
   rentalHistories RentalHistory[]
   carts           Cart[]
+  reviews Review[]
 }
 
 // 作品情報
@@ -67,6 +68,7 @@ model Review {
   evaluation  Int
   spoiler     Boolean
   item        Item    @relation(fields: [itemId], references: [itemId])
+  users           User      @relation(fields: [userId], references: [userId])
 }
 
 // レンタル履歴
