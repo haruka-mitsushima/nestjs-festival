@@ -45,13 +45,22 @@ export class UserService {
   }
 
   async getUserById(userId: number): Promise<User> {
-    const user = await this.prisma.user.findFirst({
+    const user = await this.prisma.user.findUnique({
       where: {
         userId: userId,
       },
     });
     delete user.password;
     return user;
+  }
+
+  async getUserName(userId: number): Promise<string> {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        userId: userId,
+      },
+    });
+    return user.userName;
   }
 
   async selectCart(id: number): Promise<{ cart?: Cart[]; errorFlg: boolean }> {
