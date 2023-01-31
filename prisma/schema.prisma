@@ -25,7 +25,7 @@ model User {
   firstNameKana   String
   mailAddress     String
   password        String
-  favoriteId      Int?            @default(0)
+  favoriteId      Int?
   category        Category?       @relation(fields: [favoriteId], references: [categoryId])
   rentalHistories RentalHistory[]
   carts           Cart[]
@@ -68,7 +68,7 @@ model Review {
   evaluation  Int
   spoiler     Boolean
   item        Item    @relation(fields: [itemId], references: [itemId])
-  users       User    @relation(fields: [userId], references: [userId])
+  user       User    @relation(fields: [userId], references: [userId])
 }
 
 // レンタル履歴
@@ -83,7 +83,7 @@ model RentalHistory {
   payDate         DateTime? @default(now())
   rentalStart     DateTime?
   rentalEnd       DateTime?
-  users           User      @relation(fields: [userId], references: [userId])
+  user           User      @relation(fields: [userId], references: [userId])
 }
 
 // カート情報
@@ -92,8 +92,8 @@ model Cart {
   userId       Int
   rentalPeriod Int
   itemId       Int
-  users        User @relation(fields: [userId], references: [userId])
-  items        Item @relation(fields: [itemId], references: [itemId])
+  user        User @relation(fields: [userId], references: [userId])
+  item        Item @relation(fields: [itemId], references: [itemId])
 }
 
 // チャットボットシナリオ情報

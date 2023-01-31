@@ -71,7 +71,7 @@ export class UserService {
       select: {
         carts: {
           include: {
-            items: true,
+            item: true,
           },
         },
       },

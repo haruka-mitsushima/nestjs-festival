@@ -80,7 +80,7 @@ export class ReviewService {
         reviewText: true,
         evaluation: true,
         spoiler: true,
-        users: {
+        user: {
           select: {
             userName: true,
           },
