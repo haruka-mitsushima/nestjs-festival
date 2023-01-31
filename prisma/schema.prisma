@@ -25,11 +25,11 @@ model User {
   firstNameKana   String
   mailAddress     String
   password        String
-  favoriteId      Int? @default(0)
+  favoriteId      Int?            @default(0)
   category        Category?       @relation(fields: [favoriteId], references: [categoryId])
   rentalHistories RentalHistory[]
   carts           Cart[]
-  reviews Review[]
+  reviews         Review[]
 }
 
 // 作品情報
@@ -68,13 +68,13 @@ model Review {
   evaluation  Int
   spoiler     Boolean
   item        Item    @relation(fields: [itemId], references: [itemId])
-  users           User      @relation(fields: [userId], references: [userId])
+  users       User    @relation(fields: [userId], references: [userId])
 }
 
 // レンタル履歴
 model RentalHistory {
   rentalHistoryId Int       @id @default(autoincrement())
-  userId          Int 
+  userId          Int
   itemId          Int
   itemName        String
   price           Int
