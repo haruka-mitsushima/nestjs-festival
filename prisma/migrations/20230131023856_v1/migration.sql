@@ -1,0 +1,9 @@
+-- AlterTable
+ALTER TABLE "RentalHistory" ALTER COLUMN "payDate" DROP NOT NULL,
+ALTER COLUMN "payDate" SET DEFAULT CURRENT_TIMESTAMP;
+
+-- AlterTable
+ALTER TABLE "User" ALTER COLUMN "favoriteId" SET DEFAULT 0;
+
+-- AddForeignKey
+ALTER TABLE "Review" ADD CONSTRAINT "Review_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("userId") ON DELETE RESTRICT ON UPDATE CASCADE;
