@@ -39,6 +39,11 @@ export class UserController {
     return await this.userService.getUserById(Number(id));
   }
 
+  @Post('getUserName/:id')
+  async getUserName(@Param('id', ParseIntPipe) userId: number) {
+    return await this.userService.getUserName(userId);
+  }
+
   @Get('selectCart/:id')
   async selectCart(
     @Param('id', ParseIntPipe) id: number,
