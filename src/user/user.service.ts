@@ -54,13 +54,13 @@ export class UserService {
     return user;
   }
 
-  async getUserName(userId: number): Promise<string> {
+  async getUserName(userId: number): Promise<{ userName: string }> {
     const user = await this.prisma.user.findUnique({
       where: {
         userId: userId,
       },
     });
-    return user.userName;
+    return { userName: user.userName };
   }
 
   async selectCart(id: number): Promise<{ cart?: Cart[]; errorFlg: boolean }> {
@@ -83,5 +83,16 @@ export class UserService {
     } else {
       return { cart: data.carts, errorFlg };
     }
+  }
+
+  async updateUser(userId: number, favoriteGenre: number): Promise<void> {
+    await this.prisma.user.update({
+      where: {
+        userId: userId,
+      },
+      data: {
+        favoriteId: favoriteGenre,
+      },
+    });
   }
 }

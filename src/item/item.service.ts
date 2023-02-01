@@ -20,7 +20,7 @@ export class ItemService {
     return newItems;
   }
 
-  async getItemsByGenreId(id: number): Promise<Item[]> {
+  async getItemsByGenreId(id: number, take: number): Promise<Item[]> {
     const items = await this.prisma.item.findMany({
       where: {
         categories: {
@@ -30,6 +30,7 @@ export class ItemService {
       orderBy: {
         itemId: 'desc',
       },
+      take: take,
     });
     const genreItems = items.map((item) => ({
       ...item,

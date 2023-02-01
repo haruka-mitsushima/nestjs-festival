@@ -39,8 +39,10 @@ export class UserController {
     return await this.userService.getUserById(Number(id));
   }
 
-  @Post('getUserName/:id')
-  async getUserName(@Param('id', ParseIntPipe) userId: number) {
+  @Get('getUserName/:id')
+  async getUserName(
+    @Param('id', ParseIntPipe) userId: number,
+  ): Promise<{ userName: string }> {
     return await this.userService.getUserName(userId);
   }
 
@@ -49,5 +51,13 @@ export class UserController {
     @Param('id', ParseIntPipe) id: number,
   ): Promise<{ cart?: Cart[]; errorFlg: boolean }> {
     return await this.userService.selectCart(Number(id));
+  }
+
+  @Get('updateUser/:userId/:favoriteGenre')
+  async updateUser(
+    @Param('userId', ParseIntPipe) userId: number,
+    @Param('favoriteGenre', ParseIntPipe) favoriteGenre: number,
+  ): Promise<void> {
+    await this.userService.updateUser(userId, favoriteGenre);
   }
 }

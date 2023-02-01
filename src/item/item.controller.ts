@@ -25,11 +25,12 @@ export class ItemController {
     return await this.itemService.preTop(Number(id));
   }
 
-  @Get('favorite/:id')
+  @Get('favorite/:id/:take')
   async getItemByFavoriteId(
     @Param('id', ParseIntPipe) id: number,
+    @Param('take', ParseIntPipe) take: number,
   ): Promise<Item[]> {
-    return await this.itemService.getItemsByGenreId(id);
+    return await this.itemService.getItemsByGenreId(id, take);
   }
 
   @Get('getAllItems')
