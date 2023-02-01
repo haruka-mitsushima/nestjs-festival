@@ -10,6 +10,7 @@ import { PaymentModule } from './payment/payment.module';
 import { RentalHistoryModule } from './rentalHistory/rentalHistory.module';
 import { ReviewModule } from './review/review.module';
 import { ChatbotModule } from './chatbot/chatbot.module';
+import { SearchModule } from './search/search.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { ChatbotModule } from './chatbot/chatbot.module';
     RentalHistoryModule,
     ReviewModule,
     ChatbotModule,
+    SearchModule,
   ],
   controllers: [AppController],
   providers: [AppService],
