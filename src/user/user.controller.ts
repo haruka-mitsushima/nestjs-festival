@@ -4,6 +4,7 @@ import {
   Get,
   Param,
   ParseIntPipe,
+  Patch,
   Post,
 } from '@nestjs/common';
 import { Cart, User } from '@prisma/client';
@@ -53,7 +54,7 @@ export class UserController {
     return await this.userService.selectCart(Number(id));
   }
 
-  @Get('updateUser/:userId/:favoriteGenre')
+  @Patch('updateUser/:userId/:favoriteGenre')
   async updateUser(
     @Param('userId', ParseIntPipe) userId: number,
     @Param('favoriteGenre', ParseIntPipe) favoriteGenre: number,
