@@ -59,6 +59,7 @@ export class ItemService {
       orderBy: {
         itemId: 'desc',
       },
+      take: 10,
     });
     const genreItems = result.map((item) => ({
       ...item,
